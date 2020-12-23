@@ -10,28 +10,38 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+var employees = []
 const managerInfo = () =>
-    inquirer.prompt([
-        {
-            type: 'input',
-            name: 'manager',
-            message: 'What is your Managers name?',
+    inquirer.prompt(
+        [
+            {
+                type: 'input',
+                name: 'manager',
+                message: 'What is your Managers name?'
+            },
+            {
+                type: 'input',
+                name: 'managerID',
+                message: "what is the managers ID #?"
+            },
+            {
+                type: 'input',
+                name: 'managerEmail',
+                message: 'what is the managers Email?'
+            },
+            {
+                type: 'input',
+                name: 'officeNumber',
+                message: 'What is the managers office number?'
+            }
+        ]);
 
-            type: 'input',
-            name: 'managerID',
-            message: "what is the managers ID #?",
+managerInfo().then((data) => {
+    const manager = new Manager(data.manager, data.managerID, data.managerEmail, data.officeNumber)
+    employees.push(manager);
 
-            type: 'input',
-            name: 'managerEmail',
-            message: 'what is the anagers Email?',
+});
 
-            type: 'input',
-            name: 'officeNumber',
-            message: 'What is the managers office number?'
-        }])
-
-managerInfo(data)
-    .then
 
 
 // Write code to use inquirer to gather information about the development team members,
